@@ -9,8 +9,7 @@ For Reducing video quality using FFmpeg
 ```
 ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
 ffmpeg -i input.mp4 -vcodec libx265 -crf 23 output.mp4
-ffmpeg -i input.mp4 -vcodec libx265 -x265-params lossless=1 output.mp4
-ffmpeg -i input -c:v libx265 -crf 26 -preset fast -c:a aac -b:a 128k output.mp4
+ffmpeg -i input.mp4 -c:v libx265 -crf 26 -preset fast -c:a aac -b:a 128k output.mp4
 ```
 default crf value is 23, and libx265 is HEVC (*High Efficiency Video Coding*) , for x264 [refer](https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg)
 
