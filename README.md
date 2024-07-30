@@ -2,7 +2,7 @@
 For Reducing video quality using FFmpeg
 
 [FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)      
-[Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z)
+[Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) use [7-Zip for extraction](https://www.7-zip.org/) ffmpeg.exe will be inside bin folder, copy it to video location, and rename desired video to input.mp4
 
 # For Reducing video quality
 ### higher crf means reduced quality , range is 0 to 51
