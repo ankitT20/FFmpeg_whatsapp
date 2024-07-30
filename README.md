@@ -1,8 +1,8 @@
 # FFmpeg_whatsapp
 For Reducing video quality using FFmpeg
 
-[FFmpeg for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)
-[direct link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z)
+[FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)      
+[Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z)
 
 # For Reducing video quality
 ### higher crf means reduced quality , range is 0 to 51
