@@ -24,7 +24,9 @@ verify using console output - x265 [info]: Rate Control                        :
 ### Two-Pass Encoding
 ##    for 64MB video without audio
 calculate bitrate
+
 64 * 8000 / 349 = 1467
+
 64(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 1467 (do multiplication first)
 ```
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 1467k -x265-params pass=1 -an -f null NUL && ^
@@ -33,8 +35,11 @@ ffmpeg -i input.mp4 -c:v libx265 -b:v 1467k -x265-params pass=2 -an output_64MB.
 
 ##    for 64MB video
 calculate bitrate
+
 64 * 8000 / 349 = 1467
+
 64(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 1467 (do multiplication first)
+
 1467 - 128 kBit/s (desired audio bitrate) = 1339 kBit/s video bitrate
 ```
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 1339k -x265-params pass=1 -an -f null NUL && ^
