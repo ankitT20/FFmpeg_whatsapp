@@ -17,8 +17,7 @@ ffmpeg.exe will be inside ```bin``` folder, copy it to ReduceVideoQuality.ps1 lo
     - *OR Open PowerShell, navigate to the directory containing the script, and run it using ```ReduceVideoQuality.ps1```.*
 4. Follow the prompts to provide the filename and select options.
 
-If running scripts is dissabled on your system, search powershell, *Right click and 'Run as Administrator'*, and run the following:
-<!-- To view all policy: ```Get-ExecutionPolicy -List``` -->
+If running scripts is dissabled on your system, search powershell, *Right click and 'Run as Administrator'*, and run the following:<!-- To view all policy: ```Get-ExecutionPolicy -List``` -->
 ```Set-ExecutionPolicy -ExecutionPolicy RemoteSigned```
 <!-- After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined``` -->
 
@@ -66,4 +65,3 @@ ffmpeg -i input.mp4 -c:v libx265 -b:v 1339k -x265-params pass=2 -c:a aac -b:a 12
 ```
 
 [Refrence](https://trac.ffmpeg.org/wiki/Encode/H.265#Ratecontrolmodes)
-<!--  -->
