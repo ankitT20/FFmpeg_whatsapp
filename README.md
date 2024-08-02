@@ -17,12 +17,13 @@ ffmpeg.exe will be inside ```bin``` folder, copy it to ReduceVideoQuality.ps1 lo
     - *OR Open PowerShell, navigate to the directory containing the script, and run it using ```ReduceVideoQuality.ps1```.*
 4. Follow the prompts to provide the filename and select options.
 
-If running scripts is dissabled on your system, run the following in powershell
+If running scripts is dissabled on your system, search powershell, *Right click and 'Run as Administrator'*, and run the following:
 <!-- To view all policy: ```Get-ExecutionPolicy -List``` -->
 ```Set-ExecutionPolicy -ExecutionPolicy RemoteSigned```
 <!-- After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined``` -->
 
-# For Reducing video quality
+# Documentation
+## For Reducing video quality
 ### higher crf means reduced quality , range is 0 to 51
 ```
 ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4
