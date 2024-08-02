@@ -4,6 +4,18 @@ For Reducing video quality using FFmpeg
 [FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)      
 [Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) use [7-Zip](https://www.7-zip.org/) for extraction, ffmpeg.exe will be inside bin folder, copy it to video location, and rename desired video to input.mp4
 
+### Instructions to run ReduceVideoQuality.ps1:
+1. Download as Zip and extract OR ```git clone https://github.com/ankitT20/FFmpeg_whatsapp.git```
+2. Ensure ffmpeg.exe is in the same directory/folder as the script and input video file.
+3. Select and Right click ReduceVideoQuality.ps1, click **Run with PowerShell**.
+    - *OR Open PowerShell, navigate to the directory containing the script, and run it using ```ReduceVideoQuality.ps1```.*
+4. Follow the prompts to provide the filename and select options.
+
+If running scripts is dissabled on your system, run the following in powershell
+<!-- To view all policy: ```Get-ExecutionPolicy -List``` -->
+```Set-ExecutionPolicy -ExecutionPolicy RemoteSigned```
+<!-- After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined``` -->
+
 # For Reducing video quality
 ### higher crf means reduced quality , range is 0 to 51
 ```
