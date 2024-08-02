@@ -2,15 +2,13 @@
 For Reducing video quality using FFmpeg
 
 
-## Instructions to run ReduceVideoQuality.ps1:
-0. Requirements:
+## Requirements:
 <!--  -->
-```FFmpeg``` is required to run the project
-<!--  -->
-Instructions to download FFmpeg
+```FFmpeg``` is required to run the project <!--  -->
 [FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)      
 [Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) use [7-Zip](https://www.7-zip.org/) for extraction.
 ffmpeg.exe will be inside ```bin``` folder, copy it to ReduceVideoQuality.ps1 location
+## Instructions to run ReduceVideoQuality.ps1:
 1. Download ReduceVideoQuality.ps1 file *from github*
     - *OR  Download Repository as Zip and Extract*
     - *OR ```git clone https://github.com/ankitT20/FFmpeg_whatsapp.git```*
