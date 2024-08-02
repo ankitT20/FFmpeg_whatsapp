@@ -4,8 +4,9 @@ For Reducing video quality using FFmpeg
 
 ## Instructions to run ReduceVideoQuality.ps1:
 0. Requirements:
+<!--  -->
 ```FFmpeg``` is required to run the project
-
+<!--  -->
 Instructions to download FFmpeg
 [FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)      
 [Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) use [7-Zip](https://www.7-zip.org/) for extraction.
