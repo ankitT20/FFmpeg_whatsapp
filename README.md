@@ -45,16 +45,21 @@ calculate bitrate
 
 64 * 8000 / 349 = 1467
 
-64(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 1467 (do multiplication first)
+64(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 1467 (do multiplication first)  
+512000 / [duration of video in seconds]
 ```
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 1467k -x265-params pass=1 -an -f null NUL && ^
 ffmpeg -i input.mp4 -c:v libx265 -b:v 1467k -x265-params pass=2 -an output_64MB.mp4
 ```
-
+###    for 64MB video without audio with Framerate of 30FPS
+```
+ffmpeg -y -i input.mp4 -c:v libx265 -b:v 1467k -r 30 -x265-params pass=1 -an -f null NUL && ^
+ffmpeg -i input.mp4 -c:v libx265 -b:v 1467k -r 30 -x265-params pass=2 -an output_64MB.mp4
+```
 ##    for 64MB video
 calculate bitrate
 
-64 * 8000 / 349 = 1467
+512000 / 349 = 1467
 
 64(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 1467 (do multiplication first)
 
@@ -69,6 +74,9 @@ ffmpeg -i input.mp4 -c:v libx265 -b:v 1339k -x265-params pass=2 -c:a aac -b:a 12
 ## Speed Up or Slow Down a Video  
 > For 3x speed (LOW QUALITY) (to slow PTS*3)  
 ```ffmpeg -i 'input.mp4' -filter:v "setpts=PTS/3,fps=60" -an output.mp4```  
-> For 3x speed (lossless) where 0.3 is 1/3 in decimal representation.  
+> For 3x speed (lossless) where 0.3 is 1/3 in decimal representation. *(this will create 100fps+ video, so -r 30 is MANDATORY afterwords)*
 ```ffmpeg -itsscale 0.3 -i 'input.mp4' -c copy -an fast.mp4```  
-
+  
+# Change framerate  
+> Change framerate without re-encoding *(won't reduce file size to 64MB afterwards, but still -r 30 is MANDATORY)*:  
+```(./ffmpeg -y -i input.mp4 -an -c copy -f h264 seeing_noaudio.h264) ; (./ffmpeg -y -r 30 -i seeing_noaudio.h264 -an -c copy fps.mp4)```  

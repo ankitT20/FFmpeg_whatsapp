@@ -59,7 +59,7 @@ function WhatsApp-VideoQuality {
         [int]$duration,
         [string]$outputFilename
     )
-    $audioOption = Read-Host "Include audio? (1. With audio, 2. Without audio)"
+    $audioOption = Read-Host "Include audio? (1. With audio, 2. Without audio, 3. Without audio 30 FPS)"
     
     $bitrate = [math]::Floor(512000 / $duration)
 
@@ -67,9 +67,12 @@ function WhatsApp-VideoQuality {
         $videoBitrate = [math]::Floor($bitrate - 128)
         $command1 = ".\ffmpeg.exe -y -i `"$filename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=1 -an -f null NUL"
         $command2 = ".\ffmpeg.exe -i `"$filename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=2 -c:a aac -b:a 128k `"$outputFilename`""
-    } else {
+    } elseif ($audioOption -eq 2) {
         $command1 = ".\ffmpeg.exe -y -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -x265-params pass=1 -an -f null NUL"
         $command2 = ".\ffmpeg.exe -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -x265-params pass=2 -an `"$outputFilename`""
+    } else {
+        $command1 = ".\ffmpeg.exe -y -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -r 30 -x265-params pass=1 -an -f null NUL"
+        $command2 = ".\ffmpeg.exe -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -r 30 -x265-params pass=2 -an `"$outputFilename`""
     }
 
     $finalCommand = "($command1) ; ($command2)"
