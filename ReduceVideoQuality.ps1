@@ -1,4 +1,8 @@
 ﻿# Simple FFmpeg Script for Video Processing
+# Get-ExecutionPolicy -List  
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned  
+# After work complete  
+# Set-ExecutionPolicy -ExecutionPolicy Undefined  
 
 function Get-VideoDuration {
     param (
