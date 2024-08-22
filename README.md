@@ -68,6 +68,6 @@ ffmpeg -i input.mp4 -c:v libx265 -b:v 1339k -x265-params pass=2 -c:a aac -b:a 12
 
 ## Speed Up or Slow Down a Video  
 > For 3x speed (LOW QUALITY) (to slow PTS*3)  
-```ffmpeg -i 'input.mp4' -filter:v "setpts=PTS/3,fps=60" -an output.mp4  ```  
+```ffmpeg -i 'input.mp4' -filter:v "setpts=PTS/3,fps=60" -an output.mp4```
 > For 3x speed (lossless) where 0.3 is 1/3 in decimal representation.  
-```ffmpeg -itsscale 0.3 -i 'input.mp4' -c copy -an fast.mp4  ```  
+```ffmpeg -itsscale 0.3 -i 'input.mp4' -c copy -an fast.mp4```
