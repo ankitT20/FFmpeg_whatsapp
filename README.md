@@ -1,9 +1,8 @@
 # FFmpeg_whatsapp
-For Reducing video size and quality using FFmpeg  
+PowerShell Script for Reducing Video Size and Quality using FFmpeg  
 ## Requirements:  
-```FFmpeg``` is required to run the project  
-[FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)      
-[Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) use [7-Zip](https://www.7-zip.org/) for extraction.
+```FFmpeg``` is required to run the project [FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)  
+[Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) use [7-Zip](https://www.7-zip.org) for extraction.
 ffmpeg.exe will be inside ```bin``` folder, copy it to ReduceVideoQuality.ps1 location
 ## Instructions to run ReduceVideoQuality.ps1:
 1. Download ReduceVideoQuality.ps1 file *from github*
@@ -69,18 +68,19 @@ ffmpeg -i input.mp4 -c:v libx265 -b:v 1467k -r 30 -x265-params pass=2 -an output
 [Refrence](https://trac.ffmpeg.org/wiki/Encode/H.265#Ratecontrolmodes)  
 
 ## Speed up video and audio at the same time:
-> Using a complex filtergraph
-> For 3x
+> Using a complex filtergraph (low quality),  
+> For 3x: 
 ```
 ffmpeg -i input.mp4 -filter_complex "[0:v]setpts=0.3*PTS[v];[0:a]atempo=3.0[a]" -map "[v]" -map "[a]" output.mp4
 ```
-> For 2x ```ffmpeg -i input.mp4 -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]" -map "[v]" -map "[a]" output.mp4```  
+> For 2x: ```ffmpeg -i input.mp4 -filter_complex "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]" -map "[v]" -map "[a]" output.mp4```  
 
 ### Slow Down video and audio at the same time:
 > raw bitstream method
 ```
 ffmpeg -fflags +genpts -r 15 -i raw.h264 -i input.mp4 -map 0:v -c:v copy -map 1:a -af atempo=0.5 -movflags faststart output.mp4
 ```
+[Refrence](https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video)  
 
 ## Speed Up or Slow Down a Video(without audio)  
 > For 3x speed (LOW QUALITY) (to slow PTS*3)  
@@ -89,5 +89,7 @@ ffmpeg -fflags +genpts -r 15 -i raw.h264 -i input.mp4 -map 0:v -c:v copy -map 1:
 ```ffmpeg -itsscale 0.3 -i 'input.mp4' -c copy -an fast.mp4```  
   
 ## Change framerate  
-> Change framerate without re-encoding *(won't reduce file size to 64MB afterwards, but still -r 30 is MANDATORY if using reduce size commands)*:  
-```(./ffmpeg -y -i input.mp4 -an -c copy -f h264 seeing_noaudio.h264) ; (./ffmpeg -y -r 30 -i seeing_noaudio.h264 -an -c copy fps.mp4)```  
+> Change framerate without re-encoding *(won't reduce file size to 64MB afterwards, but still -r 30 is MANDATORY if using reduce size commands)*:  ```(./ffmpeg -y -i input.mp4 -an -c copy -f h264 seeing_noaudio.h264) ; (./ffmpeg -y -r 30 -i seeing_noaudio.h264 -an -c copy fps.mp4)```  
+  
+> [!TIP]
+> All links are saved at Internet Archive [Wayback Machine](https://web.archive.org)

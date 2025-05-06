@@ -178,8 +178,8 @@ function Show-Menu {
     Write-Host "Select an option:"
     Write-Host "1. For Reducing video quality"
     Write-Host "2. For WHATSAPP highest quality video 64MB limit, without sending as document"
-    Write-Host "3) Speed up video+audio (low quality)"
-    Write-Host "4) ALL IN ONE (Speed up both LQ & convert to WhatsApp 64MB)"
+    Write-Host "3) Speed up Video+Audio (low quality)"
+    Write-Host "4) ALL IN ONE (Speed up both Video+Audio (low quality) & convert to WhatsApp 64MB)"
     Write-Host " "
     $choice = Read-Host "Enter your choice"
 
