@@ -2,15 +2,13 @@
 PowerShell Script for Reducing Video Size and Quality using FFmpeg  
 ## Requirements:  
 ```FFmpeg``` is required to run the project  
-1. Open an administrative PowerShell 
-> (press Windows key, search powershell and right-click Run as administrator)
-2. Run the following (right click on terminal for paste or Ctrl+V): 
+1. Open an **administrative PowerShell** *(press Windows key, search powershell and right-click Run as administrator)*
+2. Run the following *(right click on terminal for paste or Ctrl+V)*: 
 ```
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ankitT20/FFmpeg_whatsapp/refs/heads/main/ReduceVideoQuality.ps1'))
-
 ```
 <!-- If you want to install yt-dlp: ```choco install yt-dlp``` -->
-### Method 2 (NOT RECOMMENDED)
+### Manual Method (NOT RECOMMENDED)  
 <details>
 <summary>Click to see the process</summary>
 ### Download ffmpeg via Official website: 
@@ -34,6 +32,7 @@ Search Environment Variables open ```Edit the system environment variables```, G
 <!-- > After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined```   -->
 > To view all policy: ```Get-ExecutionPolicy -List```  
 </details>
+
 # Documentation
 ## For Reducing video quality
 > [!TIP]
