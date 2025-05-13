@@ -11,7 +11,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 ### Manual Method (NOT RECOMMENDED)  
 <details>
 <summary>Click to see the process</summary>
-### Download ffmpeg via Official website: 
+<!-- ### Download ffmpeg via Official website: 
 [FFmpeg download website for windows](https://www.gyan.dev/ffmpeg/builds/#release-builds)  
 [Direct Download link](https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z) use [7-Zip](https://www.7-zip.org) for extraction.
 ffmpeg.exe will be inside ```bin``` folder, copy the folder path including bin.  
@@ -24,13 +24,40 @@ Search Environment Variables open ```Edit the system environment variables```, G
 3. Right click *ReduceVideoQuality.ps1*, click **Run with PowerShell**.
 >    - *OR Open PowerShell, navigate to the directory containing the script, and run it using ```.\ReduceVideoQuality.ps1```.*
 4. Follow the prompts to provide the filename and select options.  
-
 > [!NOTE]
 > If running scripts is dissabled on your system, search powershell, *Right click and 'Run as Administrator'*, and run the following:  ```Set-ExecutionPolicy Bypass -Scope Process```  
-  
 > [!TIP]
-<!-- > After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined```   -->
-> To view all policy: ```Get-ExecutionPolicy -List```  
+> After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined```  
+> To view all policy: ```Get-ExecutionPolicy -List```   -->
+<h3>Download ffmpeg via Official website:</h3>
+<p><a href="https://www.gyan.dev/ffmpeg/builds/#release-builds">FFmpeg download website for windows</a><br><a href="https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-full.7z">Direct Download link</a> use <a href="https://www.7-zip.org">7-Zip</a> for extraction.
+ffmpeg.exe will be inside <code>bin</code> folder, copy the folder path including bin.<br>Search Environment Variables open <code>Edit the system environment variables</code>, Go to Environment Variables, Under System variables(bottom box), double click <code>Path</code>, click New, paste folder path, click ok, ok.  </p>
+<h3>Instructions to run ReduceVideoQuality.ps1:</h3>
+<ol>
+<li>Download ReduceVideoQuality.ps1 file <em>from github</em><blockquote>
+<ul>
+<li><em>OR  Download Repository as Zip and Extract</em></li>
+<li><em>OR <code>git clone https://github.com/ankitT20/FFmpeg_whatsapp.git</code></em></li>
+</ul>
+</blockquote>
+</li>
+<li>Ensure <em>ReduceVideoQuality.ps1</em> and input video file are all in same directory/<em>folder</em>.</li>
+<li>Right click <em>ReduceVideoQuality.ps1</em>, click <strong>Run with PowerShell</strong>.<blockquote>
+<ul>
+<li><em>OR Open PowerShell, navigate to the directory containing the script, and run it using <code>.\ReduceVideoQuality.ps1</code>.</em></li>
+</ul>
+</blockquote>
+</li>
+<li>Follow the prompts to provide the filename and select options.</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 
+If running scripts is dissabled on your system, search powershell, <em>Right click and &#39;Run as Administrator&#39;</em>, and run the following:  <code>Set-ExecutionPolicy Bypass -Scope Process</code>  </p>
+<p>[!TIP] 
+After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined```  
+To view all policy: <code>Get-ExecutionPolicy -List</code>  </p>
+</blockquote>
+
 </details>
 
 # Documentation
