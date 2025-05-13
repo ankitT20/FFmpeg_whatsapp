@@ -8,7 +8,7 @@ function Get-VideoDuration {
     param (
         [string]$filename
     )
-    $durationOutput = .\ffmpeg.exe -i "$filename" 2>&1 | Select-String "Duration"
+    $durationOutput = ffmpeg -i "$filename" 2>&1 | Select-String "Duration"
     if ($durationOutput -match "Duration: (\d{2}):(\d{2}):(\d{2})") {
         $hours = [int]$matches[1]
         $minutes = [int]$matches[2]
@@ -57,9 +57,9 @@ function Reduce-VideoQuality {
         $crf = 28
     }
     if ($crf -eq 0) {
-        $command = ".\ffmpeg.exe -i `"$filename`" -vcodec libx265 -x265-params lossless=1 `"$outputFilename`""
+        $command = "ffmpeg -i `"$filename`" -vcodec libx265 -x265-params lossless=1 `"$outputFilename`""
     } else {
-        $command = ".\ffmpeg.exe -i `"$filename`" -vcodec libx265 -crf $crf `"$outputFilename`""
+        $command = "ffmpeg -i `"$filename`" -vcodec libx265 -crf $crf `"$outputFilename`""
     }
     Write-Host "Running command: $command"
     Invoke-Expression $command
@@ -74,18 +74,18 @@ function WhatsApp-VideoQuality {
     )
     $audioOption = Read-Host "Include audio? (1. With audio, 2. Without audio, 3. Without audio 30 FPS)"
     
-    $bitrate = [math]::Floor(512000 / $duration)
+    $bitrate = [math]::Floor(752000 / $duration)
 
     if ($audioOption -eq 1) {
         $videoBitrate = [math]::Floor($bitrate - 128)
-        $command1 = ".\ffmpeg.exe -y -i `"$filename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=1 -an -f null NUL"
-        $command2 = ".\ffmpeg.exe -i `"$filename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=2 -c:a aac -b:a 128k `"$outputFilename`""
+        $command1 = "ffmpeg -y -i `"$filename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=1 -an -f null NUL"
+        $command2 = "ffmpeg -i `"$filename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=2 -c:a aac -b:a 128k `"$outputFilename`""
     } elseif ($audioOption -eq 2) {
-        $command1 = ".\ffmpeg.exe -y -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -x265-params pass=1 -an -f null NUL"
-        $command2 = ".\ffmpeg.exe -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -x265-params pass=2 -an `"$outputFilename`""
+        $command1 = "ffmpeg -y -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -x265-params pass=1 -an -f null NUL"
+        $command2 = "ffmpeg -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -x265-params pass=2 -an `"$outputFilename`""
     } else {
-        $command1 = ".\ffmpeg.exe -y -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -r 30 -x265-params pass=1 -an -f null NUL"
-        $command2 = ".\ffmpeg.exe -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -r 30 -x265-params pass=2 -an `"$outputFilename`""
+        $command1 = "ffmpeg -y -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -r 30 -x265-params pass=1 -an -f null NUL"
+        $command2 = "ffmpeg -i `"$filename`" -c:v libx265 -b:v ${bitrate}k -r 30 -x265-params pass=2 -an `"$outputFilename`""
     }
 
     $finalCommand = "($command1) ; ($command2)"
@@ -117,7 +117,7 @@ function SpeedUp-Video {
     # Calculate video PTS multiplier (1 / ratio)
     $videoPTS = [math]::Round(1 / $parsedRatio, 3)
     $audioTempo = $parsedRatio
-    $command = ".\ffmpeg.exe -i `"$filename`" -filter_complex `"[0:v]setpts=$videoPTS*PTS[v];[0:a]atempo=$audioTempo[a]`" -map `"[v]`" -map `"[a]`" `"$outputFilename`""
+    $command = "ffmpeg -i `"$filename`" -filter_complex `"[0:v]setpts=$videoPTS*PTS[v];[0:a]atempo=$audioTempo[a]`" -map `"[v]`" -map `"[a]`" `"$outputFilename`""
     Write-Host "Running command: $command"
     Invoke-Expression $command
     Write-Host "DONE: Sped-up video saved to $outputFilename"
@@ -141,25 +141,25 @@ function AllInOne {
     }
     $videoPTS = [math]::Round(1 / $parsedRatio, 3)
     $audioTempo = $parsedRatio
-    $command = ".\ffmpeg.exe -i `"$filename`" -filter_complex `"[0:v]setpts=$videoPTS*PTS[v];[0:a]atempo=$audioTempo[a]`" -map `"[v]`" -map `"[a]`" `"$tempFilename`""
+    $command = "ffmpeg -i `"$filename`" -filter_complex `"[0:v]setpts=$videoPTS*PTS[v];[0:a]atempo=$audioTempo[a]`" -map `"[v]`" -map `"[a]`" `"$tempFilename`""
     Write-Host "Running command: $command"
     Invoke-Expression $command
     Write-Host "DONE: Speed-up video"
     
     $fileSizeBytes = (Get-Item $tempFilename).Length
-    $maxSizeBytes = 64MB
+    $maxSizeBytes = 94MB
     if ($fileSizeBytes -lt $maxSizeBytes) {
-        Write-Host "The Speed-up video is already under 64MB. No need to process."
+        Write-Host "The Speed-up video is already under 94MB. No need to process."
         Rename-Item -Path $tempFilename -NewName $outputFilename
         Write-Host "DONE: output file name is " $outputFilename
         exit
     }
     
     $duration = Get-VideoDuration -filename $tempFilename
-    $bitrate = [math]::Floor(512000 / $duration)
+    $bitrate = [math]::Floor(752000 / $duration)
     $videoBitrate = [math]::Floor($bitrate - 128)
-    $command1 = ".\ffmpeg.exe -y -i `"$tempFilename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=1 -an -f null NUL"
-    $command2 = ".\ffmpeg.exe -i `"$tempFilename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=2 -c:a aac -b:a 128k `"$outputFilename`""
+    $command1 = "ffmpeg -y -i `"$tempFilename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=1 -an -f null NUL"
+    $command2 = "ffmpeg -i `"$tempFilename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=2 -c:a aac -b:a 128k `"$outputFilename`""
     $finalCommand = "($command1) ; ($command2)"
     Write-Host "Running commands: $finalCommand"
     Invoke-Expression $finalCommand
@@ -177,9 +177,9 @@ function Show-Menu {
 
     Write-Host "Select an option:"
     Write-Host "1. For Reducing video quality"
-    Write-Host "2. For WHATSAPP highest quality video 64MB limit, without sending as document"
+    Write-Host "2. For WHATSAPP highest quality video 94MB limit, without sending as document"
     Write-Host "3) Speed up Video+Audio (low quality)"
-    Write-Host "4) ALL IN ONE (Speed up both Video+Audio (low quality) & convert to WhatsApp 64MB)"
+    Write-Host "4) ALL IN ONE (Speed up both Video+Audio (low quality) & convert to WhatsApp 94MB)"
     Write-Host " "
     $choice = Read-Host "Enter your choice"
 
@@ -191,6 +191,24 @@ function Show-Menu {
         default { Write-Host "Invalid choice, please select a number (1 or 2 or...)" }
     }
 }
+
+# Ensure TLS 1.2
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+
+# Install Chocolatey if not already installed
+if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+    Write-Host "Installing Chocolatey..."
+    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+}
+
+# Install ffmpeg-full if not already installed
+if (-not (Get-Command ffmpeg -ErrorAction SilentlyContinue)) {
+    Write-Host "Installing FFmpeg..."
+    choco install ffmpeg-full -y
+}
+
+Write-Host "Ensure input video file are in current directory/folder as seen beside. If not then change directory to the folder where the video file is located using cd. OR give full path of the video file."
+Write-Host " "
 
 # Main script
 $filename = Read-Host "Enter the filename of the video"
