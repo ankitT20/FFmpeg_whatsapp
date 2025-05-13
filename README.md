@@ -1,5 +1,5 @@
 # FFmpeg_whatsapp
-PowerShell Script for Reducing Video Size and Quality using FFmpeg  
+PowerShell Script for Reducing Video Size and Quality using FFmpeg to exactly 94MB for WhatsApp  
 ## Requirements:  
 ```FFmpeg``` is required to run the project  
 1. Open an **administrative PowerShell** *(press Windows key, search powershell and right-click Run as administrator)*
