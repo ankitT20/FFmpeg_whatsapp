@@ -52,7 +52,8 @@ ffmpeg.exe will be inside <code>bin</code> folder, copy the folder path includin
 </ol>
 <blockquote>
 <p>[!NOTE] 
-If running scripts is dissabled on your system, search powershell, <em>Right click and &#39;Run as Administrator&#39;</em>, and run the following:  <code>Set-ExecutionPolicy Bypass -Scope Process</code>  </p>
+If running scripts is dissabled on your system, search powershell, <em>Right click and &#39;Run as Administrator&#39;</em>, and run the following:  <code>Set-ExecutionPolicy -Scope Process Bypass</code>  </p>
+<!-- Set-ExecutionPolicy Bypass -Scope Process -->
 <p>[!TIP] 
 After work is completed: ```Set-ExecutionPolicy -ExecutionPolicy Undefined```  
 To view all policy: <code>Get-ExecutionPolicy -List</code>  </p>
