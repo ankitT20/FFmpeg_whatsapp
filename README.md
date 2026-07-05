@@ -88,26 +88,26 @@ As of 14 May 2025: (Android WhatsApp V2.25.14.76) HD LIMIT: 180MB, SD LIMIT: 67M
 ### Two-Pass Encoding
 ## for 180MB video
 calculate bitrate  
-1440000 / 349 = 2154  
-180(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 2154 (do multiplication first)  
-2154 - 128 kBit/s (desired audio bitrate) = 2026 kBit/s video bitrate
+1440000 / 349 = 4126  
+180(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 4126 (do multiplication first)  
+4126 - 128 kBit/s (desired audio bitrate) = 3998 kBit/s video bitrate
 ```
-ffmpeg -y -i input.mp4 -c:v libx265 -b:v 2026k -x265-params pass=1 -an -f null NUL && ^
-ffmpeg -i input.mp4 -c:v libx265 -b:v 2026k -x265-params pass=2 -c:a aac -b:a 128k output.mp4
+ffmpeg -y -i input.mp4 -c:v libx265 -b:v 3998k -x265-params pass=1 -an -f null NUL && ^
+ffmpeg -i input.mp4 -c:v libx265 -b:v 3998k -x265-params pass=2 -c:a aac -b:a 128k output.mp4
 ```
 ## for 180MB video without audio
 calculate bitrate  
-180 * 8000 / 349 = 2154  
-180(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 2154 (do multiplication first)  
+180 * 8000 / 349 = 4126  
+180(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 4126 (do multiplication first)  
 1440000 / [duration of video in seconds]
 ```
-ffmpeg -y -i input.mp4 -c:v libx265 -b:v 2154k -x265-params pass=1 -an -f null NUL && ^
-ffmpeg -i input.mp4 -c:v libx265 -b:v 2154k -x265-params pass=2 -an output_64MB.mp4
+ffmpeg -y -i input.mp4 -c:v libx265 -b:v 4126k -x265-params pass=1 -an -f null NUL && ^
+ffmpeg -i input.mp4 -c:v libx265 -b:v 4126k -x265-params pass=2 -an output_64MB.mp4
 ```
 ### for 180MB video without audio with Framerate of 30FPS
 ```
-ffmpeg -y -i input.mp4 -c:v libx265 -b:v 2154k -r 30 -x265-params pass=1 -an -f null NUL && ^
-ffmpeg -i input.mp4 -c:v libx265 -b:v 2154k -r 30 -x265-params pass=2 -an output_64MB.mp4
+ffmpeg -y -i input.mp4 -c:v libx265 -b:v 4126k -r 30 -x265-params pass=1 -an -f null NUL && ^
+ffmpeg -i input.mp4 -c:v libx265 -b:v 4126k -r 30 -x265-params pass=2 -an output_64MB.mp4
 ```
 [Refrence](https://trac.ffmpeg.org/wiki/Encode/H.265#Ratecontrolmodes)  
 
