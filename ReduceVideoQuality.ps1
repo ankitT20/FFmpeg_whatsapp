@@ -74,7 +74,7 @@ function WhatsApp-VideoQuality {
     )
     $audioOption = Read-Host "Include audio? (1. With audio, 2. Without audio, 3. Without audio 30 FPS)"
     
-    $bitrate = [math]::Floor(752000 / $duration)
+    $bitrate = [math]::Floor(1440000 / $duration)
 
     if ($audioOption -eq 1) {
         $videoBitrate = [math]::Floor($bitrate - 128)
@@ -147,16 +147,16 @@ function AllInOne {
     Write-Host "DONE: Speed-up video"
     
     $fileSizeBytes = (Get-Item $tempFilename).Length
-    $maxSizeBytes = 94MB
+    $maxSizeBytes = 180MB
     if ($fileSizeBytes -lt $maxSizeBytes) {
-        Write-Host "The Speed-up video is already under 94MB. No need to process."
+        Write-Host "The Speed-up video is already under 180MB. No need to process."
         Rename-Item -Path $tempFilename -NewName $outputFilename
         Write-Host "DONE: output file name is " $outputFilename
         exit
     }
     
     $duration = Get-VideoDuration -filename $tempFilename
-    $bitrate = [math]::Floor(752000 / $duration)
+    $bitrate = [math]::Floor(1440000 / $duration)
     $videoBitrate = [math]::Floor($bitrate - 128)
     $command1 = "ffmpeg -y -i `"$tempFilename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=1 -an -f null NUL"
     $command2 = "ffmpeg -i `"$tempFilename`" -c:v libx265 -b:v ${videoBitrate}k -x265-params pass=2 -c:a aac -b:a 128k `"$outputFilename`""
@@ -177,9 +177,9 @@ function Show-Menu {
 
     Write-Host "Select an option:"
     Write-Host "1. For Reducing video quality"
-    Write-Host "2. For WHATSAPP highest quality video 94MB limit, without sending as document"
+    Write-Host "2. For WHATSAPP highest quality video 180MB limit, without sending as document"
     Write-Host "3) Speed up Video+Audio (low quality)"
-    Write-Host "4) ALL IN ONE (Speed up both Video+Audio (low quality) & convert to WhatsApp 94MB)"
+    Write-Host "4) ALL IN ONE (Speed up both Video+Audio (low quality) & convert to WhatsApp 180MB)"
     Write-Host " "
     $choice = Read-Host "Enter your choice"
 
