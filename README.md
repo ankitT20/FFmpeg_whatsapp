@@ -102,12 +102,12 @@ calculate bitrate
 1440000 / [duration of video in seconds]
 ```
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 4126k -x265-params pass=1 -an -f null NUL && ^
-ffmpeg -i input.mp4 -c:v libx265 -b:v 4126k -x265-params pass=2 -an output_64MB.mp4
+ffmpeg -i input.mp4 -c:v libx265 -b:v 4126k -x265-params pass=2 -an output_180MB.mp4
 ```
 ### for 180MB video without audio with Framerate of 30FPS
 ```
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 4126k -r 30 -x265-params pass=1 -an -f null NUL && ^
-ffmpeg -i input.mp4 -c:v libx265 -b:v 4126k -r 30 -x265-params pass=2 -an output_64MB.mp4
+ffmpeg -i input.mp4 -c:v libx265 -b:v 4126k -r 30 -x265-params pass=2 -an output_180MB.mp4
 ```
 [Refrence](https://trac.ffmpeg.org/wiki/Encode/H.265#Ratecontrolmodes)  
 
@@ -133,7 +133,7 @@ ffmpeg -fflags +genpts -r 15 -i raw.h264 -i input.mp4 -map 0:v -c:v copy -map 1:
 ```ffmpeg -itsscale 0.3 -i 'input.mp4' -c copy -an fast.mp4```  
   
 ## Change framerate  
-> Change framerate without re-encoding *(won't reduce file size to 64MB afterwards, but still -r 30 is MANDATORY if using reduce size commands)*:  ```(./ffmpeg -y -i input.mp4 -an -c copy -f h264 seeing_noaudio.h264) ; (./ffmpeg -y -r 30 -i seeing_noaudio.h264 -an -c copy fps.mp4)```  
+> Change framerate without re-encoding *(won't reduce file size to 180MB afterwards, but still -r 30 is MANDATORY if using reduce size commands)*:  ```(./ffmpeg -y -i input.mp4 -an -c copy -f h264 seeing_noaudio.h264) ; (./ffmpeg -y -r 30 -i seeing_noaudio.h264 -an -c copy fps.mp4)```  
   
 > [!TIP]
 > All links are saved at Internet Archive [Wayback Machine](https://web.archive.org)
