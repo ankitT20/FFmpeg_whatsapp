@@ -1,5 +1,5 @@
 # FFmpeg_whatsapp
-PowerShell Script for Reducing Video Size and Quality using FFmpeg to exactly 94MB for WhatsApp  
+PowerShell Script for Reducing Video Size and Quality using FFmpeg to exactly 180MB for WhatsApp  
 ## Requirements:  
 ```FFmpeg``` is required to run the project  
 1. Open an **administrative PowerShell** *(press Windows key, search powershell and right-click Run as administrator)*
@@ -83,10 +83,10 @@ ffmpeg -i input.mp4 -vcodec libx265 -x265-params lossless=1 output.mp4
 verify using console output - x265 [info]: Rate Control                        : Lossless
 
 
-# For WHATSAPP higgest quality video 94MB limit, without sending as document.
-As of 14 May 2025: (Android WhatsApp V2.25.14.76) HD LIMIT: 94MB, SD LIMIT: 67MB
+# For WHATSAPP higgest quality video 180MB limit, without sending as document.
+As of 14 May 2025: (Android WhatsApp V2.25.14.76) HD LIMIT: 180MB, SD LIMIT: 67MB
 ### Two-Pass Encoding
-## for 94MB video
+## for 180MB video
 calculate bitrate  
 752000 / 349 = 2154  
 94(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 2154 (do multiplication first)  
@@ -95,7 +95,7 @@ calculate bitrate
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 2026k -x265-params pass=1 -an -f null NUL && ^
 ffmpeg -i input.mp4 -c:v libx265 -b:v 2026k -x265-params pass=2 -c:a aac -b:a 128k output.mp4
 ```
-## for 94MB video without audio
+## for 180MB video without audio
 calculate bitrate  
 94 * 8000 / 349 = 2154  
 94(desired file size) * 8(byte to bit) * 1000(MB to KB) / 349(**duration of video in seconds**) = 2154 (do multiplication first)  
@@ -104,7 +104,7 @@ calculate bitrate
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 2154k -x265-params pass=1 -an -f null NUL && ^
 ffmpeg -i input.mp4 -c:v libx265 -b:v 2154k -x265-params pass=2 -an output_64MB.mp4
 ```
-### for 94MB video without audio with Framerate of 30FPS
+### for 180MB video without audio with Framerate of 30FPS
 ```
 ffmpeg -y -i input.mp4 -c:v libx265 -b:v 2154k -r 30 -x265-params pass=1 -an -f null NUL && ^
 ffmpeg -i input.mp4 -c:v libx265 -b:v 2154k -r 30 -x265-params pass=2 -an output_64MB.mp4
